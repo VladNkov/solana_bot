@@ -51,21 +51,18 @@ while True:
             if diff >= 1 and price > last_price:
                 bot.send_message(
                     CHAT_ID,
-                    f"🟢🔺 Курс ВЫРОС!\nБыло: {last_price:.2f}\nСтало: {price:.2f}\nИзменение: {diff:.2f} USDT"
-                )
-                print(f"🟢🔺 Курс ВЫРОС!\nБыло: {last_price:.2f}\nСтало: {price:.2f}\nИзменение: {diff:.2f} USDT")
+                    f"🟢🔺 Курс ВЫРОС!\nСтало: {price:.2f}\nБыло: {last_price:.2f}\nИзменение: {diff:.2f} USDT")
+                print(f"🟢🔺 Курс ВЫРОС!\nСтало: {price:.2f}\nБыло: {last_price:.2f}\nИзменение: {diff:.2f} USDT")
                 last_price = price
             elif diff >= 1 and price < last_price:
                 bot.send_message(
                     CHAT_ID,
-                    f"🔴🔻 Курс УПАЛ!\nБыло: {last_price:.2f}\nСтало: {price:.2f}\nИзменение: {diff:.2f} USDT"
-                )
-                print(f"🔴🔻 Курс УПАЛ!\nБыло: {last_price:.2f}\nСтало: {price:.2f}\nИзменение: {diff:.2f} USDT")
+                    f"🔴🔻 Курс УПАЛ!\nСтало: {price:.2f}\nБыло: {last_price:.2f}\nИзменение: {diff:.2f} USDT")
+                print(f"🔴🔻 Курс УПАЛ!\nСтало: {price:.2f}\nБыло: {last_price:.2f}\nИзменение: {diff:.2f} USDT")
                 last_price = price
 
-
-        time.sleep(30)
+        time.sleep(60)
 
     except Exception as e:
         bot.send_message(CHAT_ID, f"Ошибка: {e}")
-        time.sleep(30)
+        time.sleep(60)
