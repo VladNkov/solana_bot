@@ -4,6 +4,7 @@ from datetime import datetime
 import requests
 import telebot
 from dotenv import load_dotenv
+from telebot.apihelper import ApiTelegramException
 
 load_dotenv()
 BOT_TOKEN = os.getenv('BOT_TOKEN')
@@ -15,6 +16,23 @@ url = "https://api.binance.com/api/v3/ticker/price"
 params = {"symbol": "SOLUSDT"}
 
 last_price = None
+
+
+def safe_send_massage(chat_id, text, retries=3, dalay=5):
+    for attempt in range(1, retries+1):
+        try:
+            bot.send_message(chat_id, text)
+            return True
+        except ApiTelegramException as e:
+            print(f'⚠️ Ошибка Telegram (попытка {attempt}/{retries}): {e}')
+            if attempt < retries:
+                time.sleep(dalay)
+        except Exception as e:
+            print(f"❌ Непредвиденная ошибка при отправке: {e}")
+            break
+        print('🚫 Не удалось отправить сообщение в Telegram.')
+        return False
+
 
 while True:
     try:
